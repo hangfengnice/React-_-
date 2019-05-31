@@ -30,7 +30,7 @@ export default (state = fromJS(defaultValue), action) => {
       return changeHomeData(state,action)
 
     case contants.ADD_HOME_LIST:
-      return addAriticleList(state.action)
+      return addAriticleList(state,action)
 
     case contants.TOOGLE_SCROLL_TOP:
     return state.merge({
