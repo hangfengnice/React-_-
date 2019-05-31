@@ -11,6 +11,8 @@
 
 ### redux
 - createStore
+  reducer
+  
    + 
 - combineReducers
    + 整合reducer
@@ -45,3 +47,4 @@
    + 
 - List
    + 
+
