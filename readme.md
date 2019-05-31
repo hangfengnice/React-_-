@@ -3,36 +3,37 @@
 ## 关键点  
 
 ### 数据单向流  
-- 由store存储数据，reducer处理数据 
+- 由store存储数据，reducer处理数据  
    + 省事的话把store放在入口文件处  
-   ```javascript  
-   import React from 'react';
-   import {GlobalStyle } from './style.js';
-   import {CreateGlobalStyle} from './statics/iconfont/iconfont'
-   import { BrowserRouter, Route } from "react-router-dom"
-   import Header from './common/header'
-   import store from './store'
-   import {Provider} from 'react-redux'
-   import Home from './pages/home'
-   import Detail from './pages/detail'
-   import Login from './pages/login'
-   function App() {
-   return (
-   <Provider store={store}>
-   <GlobalStyle/>
-   <CreateGlobalStyle/>  
-   <BrowserRouter>
-   <Header/>
-   <Route exact path='/' component={Home}></Route>
-   <Route exact path='/login' component={Login}></Route>
-   <Route exact path='/detail/:id' component={Detail}></Route>
+   + 下面是个关键文件
+```javascript  
+import React from 'react';        //能够解析JSX
+import {GlobalStyle } from './style.js';
+import {CreateGlobalStyle} from './statics/iconfont/iconfont'
+import { BrowserRouter, Route } from "react-router-dom"
+import Header from './common/header'
+import store from './store'
+import {Provider} from 'react-redux'
+import Home from './pages/home'
+import Detail from './pages/detail'
+import Login from './pages/login'
+function App() {
+return (
+<Provider store={store}>
+<GlobalStyle/>
+<CreateGlobalStyle/>  
+<BrowserRouter>
+<Header/>
+<Route exact path='/' component={Home}></Route>
+<Route exact path='/login' component={Login}></Route>
+<Route exact path='/detail/:id' component={Detail}></Route>
 
-      </BrowserRouter>
-   </Provider>
-  );
-   }
-   export default App;  
-   ```  
+</BrowserRouter>
+</Provider>
+);
+}
+export default App;  
+```  
    
    
 ### 功能模块化（各司其职）  
