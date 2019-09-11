@@ -6,9 +6,12 @@ import Header from '../../components/header'
 
 import Home from '../home/home'
 import category from '../category/category'
-import charts from "../charts/charts";
 import product from "../product/product";
 import role from "../role/role";
+import User from "../user/user";
+import Bar from "../charts/bar";
+import Line from "../charts/line";
+import Pie from "../charts/pie";
 
 const { Footer, Sider, Content } = Layout;
 
@@ -21,15 +24,17 @@ export default class admin extends Component {
         </Sider>
         <Layout>
           <Header />
-          <Content style={{ background: "#fff" }}>
+          <Content style={{ background: "#fff", margin: "20px" }}>
             <Switch>
-              <Route path="/admin/home" component={Home} />
-              <Route path="/admin/category" component={category} />
-              <Route path="/admin/product" component={product} />
-              <Route path="admin/role" component={role} />
-              <Route path="admin/charts" component={charts} />
-              {/* <Route path="admin/role" component={home} /> */}
-              <Redirect to="/admin/home" />
+              <Route path="/home" component={Home} />
+              <Route path="/category" component={category} />
+              <Route path="/product" component={product} />
+              <Route path="/role" component={role} />
+              <Route path="/user" component={User} />
+              <Route path="/charts/bar" component={Bar} />
+              <Route path="/charts/line" component={Line} />
+              <Route path="/charts/pie" component={Pie} />
+              <Redirect to="/home" />
             </Switch>
           </Content>
           <Footer style={{ textAlign: "center" }}>use google !!</Footer>

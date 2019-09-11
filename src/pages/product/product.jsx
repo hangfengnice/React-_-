@@ -1,23 +1,20 @@
-import React, { Component } from 'react'
-import {Layout} from 'antd'
-import LeftNav from '../../components/left-nav'
-import Header from '../../components/header'
+import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import "./product.less";
 
-const { Footer, Sider, Content } = Layout;
+import ProductHome from "./home";
+import ProductAddUpdate from "./add-update";
+import ProductDetail from "./detail";
 
-export default class admin extends Component {
+export default class Product extends Component {
   render() {
     return (
-      <Layout style={{ height: "100%" }}>
-        <Sider>
-          <LeftNav></LeftNav>
-        </Sider>
-        <Layout>
-          <Header />
-          <Content style={{ background: "#fff" }}>Content</Content>
-          <Footer style={{ textAlign: "center"}}>use google !!</Footer>
-        </Layout>
-      </Layout>
+      <Switch>
+        <Route path="/product" exact component={ProductHome} />
+        <Route path="/product/addupdate" component={ProductAddUpdate} />
+        <Route path="/product/detail" component={ProductDetail} />
+        <Redirect to="/product" />
+      </Switch>
     );
   }
 }
