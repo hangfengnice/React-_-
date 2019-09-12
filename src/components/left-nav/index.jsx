@@ -25,7 +25,7 @@ class leftNav extends Component {
           </Menu.Item>
         );
       } else {
-        const cItem = item.children.find(cItem => cItem.key === path)
+        const cItem = item.children.find(cItem => path.indexOf(cItem.key) === 0)
           if (cItem) {
             this.openKey = cItem.key
           }
@@ -45,7 +45,6 @@ class leftNav extends Component {
       }
       return pre
     }, [])
-    console.log(list);
     return list
   }
   // getMenuNodes = (menuList) => {
@@ -78,12 +77,16 @@ class leftNav extends Component {
   /**
    * 
    */
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this.menuNodes = this.getMenuNodes2(menuList);
   }
 
   render() {
-    const selectKey = this.props.location.pathname
+    let selectKey = this.props.location.pathname
+    if(selectKey.indexOf('/product') === 0) {
+      selectKey = '/product'
+    }
+
     return (
       <div className="left-nav">
         <Link className="left-nav-link" to="/admin/home">

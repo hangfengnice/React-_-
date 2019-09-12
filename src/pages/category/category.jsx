@@ -77,7 +77,7 @@ export default class category extends Component {
       })
     }
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.initColumn()
   }
   componentDidMount() {

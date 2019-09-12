@@ -3,6 +3,7 @@ import { Card, Select, Input, Button, Icon, Table, message } from "antd";
 import { reqProducts, reqSearchProducts, reqUpdateStatus } from "../../api";
 import LinkButton from "../../components/link-button";
 import { PAGE_SIZE } from "../../utils/constant";
+import memoryUtils from "../../utils/memoryUtils";
 const Option = Select.Option;
 
 export default class product extends Component {
@@ -62,11 +63,21 @@ export default class product extends Component {
         render: product => (
           <span>
             <LinkButton
-              onClick={() => this.props.history.push("/product/detail")}
+              onClick={product => {
+                memoryUtils.product = product;
+                this.props.history.push("/product/detail");
+              }}
             >
               详情
             </LinkButton>
-            <LinkButton>修改</LinkButton>
+            <LinkButton
+              onClick={product => {
+                memoryUtils.product = product;
+                this.props.history.push("/product/addupdate");
+              }}
+            >
+              修改
+            </LinkButton>
           </span>
         )
       }
@@ -94,7 +105,7 @@ export default class product extends Component {
       });
     }
   };
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.initColumn();
   }
   componentDidMount() {
@@ -125,7 +136,9 @@ export default class product extends Component {
       </span>
     );
     const extra = (
-      <Button type="primary">
+      <Button type="primary" onClick={() => {
+        memoryUtils.product = {}
+        this.props.history.push('/product/addupdate')}}>
         <Icon type="plus" />
         添加商品
       </Button>

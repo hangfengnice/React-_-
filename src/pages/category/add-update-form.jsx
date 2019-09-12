@@ -13,7 +13,7 @@ class AddUpdateform extends Component {
     categoryName: PropTypes.string
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.setForm(this.props.form);
   }
 

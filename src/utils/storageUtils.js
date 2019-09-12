@@ -6,7 +6,7 @@ export default {
   保存user
   */
   saveUser(user) {
-    localStorage.set(USER_KEY, user);
+    localStorage.setItem(USER_KEY, user);
   },
 
   /* 
@@ -14,7 +14,7 @@ export default {
   */
   getUser() {
     // return JSON.parse(localStorage.getItem(USER_KEY) || '{}')
-    return localStorage.get(USER_KEY) || {};
+    return localStorage.getItem(USER_KEY) || {};
   },
 
   /* 
@@ -22,6 +22,6 @@ export default {
   */
   removeUser() {
     // localStorage.removeItem(USER_KEY)
-    localStorage.remove(USER_KEY);
+    localStorage.removeItem(USER_KEY);
   }
 };

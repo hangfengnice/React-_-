@@ -20,7 +20,6 @@ export const reqWeather = (city) => {
     const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`;
     jsonp(url, {}, (err, data) => {
       if(!err && data.error === 0) {
-        console.log(data);
         const { dayPictureUrl, weather } = data.results[0].weather_data[0]
         resolve({dayPictureUrl, weather});
       } else {
@@ -44,7 +43,6 @@ export const reqAddCategory = categoryName => ajax.post(Base + "/manage/category
 
 // 更新分类
 export const reqUpdateCategory = ({categoryId,categoryName}) => {
-  console.log(categoryId, categoryName);
   return ajax.post(Base + "/manage/category/update", {
     categoryId,
     categoryName
@@ -73,3 +71,10 @@ export const reqUpdateStatus = (productId, status) => ajax(Base + '/manage/produ
     status
   }
 })
+
+// 删除图片
+export const reqDeleteImg = (name) => ajax.post(Base + '/manage/img/delete', {name})
+
+// 添加/ 修改商品
+
+export const reqAddUpdateProduct = (product) => ajax.post(Base + `/manage/product/${product._id ? "update" : "add"}`, product)
