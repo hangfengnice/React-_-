@@ -13,10 +13,15 @@ import Bar from "../charts/bar";
 import Line from "../charts/line";
 import Pie from "../charts/pie";
 
+import memoryUtils from "../../utils/memoryUtils";
 const { Footer, Sider, Content } = Layout;
 
 export default class admin extends Component {
   render() {
+    const user = memoryUtils.user
+    if(!user || !user._id) {
+      return <Redirect to='/login' />
+    }
     return (
       <Layout style={{ height: "100%" }}>
         <Sider>

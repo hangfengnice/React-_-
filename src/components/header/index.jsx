@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import {Modal} from 'antd'
 import {formateDate} from '../../utils/dateUtils'
-import './index.less'
-
+import memoryUtils from '../../utils/memoryUtils'
 import LinkButton from '../link-button'
 import {reqWeather} from '../../api'
 import menuList from '../../config/menuConfig'
+import "./index.less";
 
 
 class Header extends Component {
@@ -65,11 +65,12 @@ class Header extends Component {
 
   render() {
     const { currentTime, dayPictureUrl, weather } = this.state;
+    const user = memoryUtils.user.username
     const title = this.getTitle();
     return (
       <div className="header">
         <div className="header-top">
-          欢迎, admin &nbsp;&nbsp;
+          欢迎, {user} &nbsp;&nbsp;
           <LinkButton onClick={this.logout}>
             退出
           </LinkButton>

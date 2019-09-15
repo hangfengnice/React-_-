@@ -1,15 +1,15 @@
 import axios from 'axios'
 import {message} from 'antd'
 
-axios.interceptors.request.use(function(config) {
+axios.interceptors.request.use(config => {
   return config;
 });
 
 axios.interceptors.response.use(
-  function(response) {
+  (response) => {
     return response.data;
   },
-  function(error) {
+  (error) => {
     message.error("请求出错 " + error.message);
     return new Promise(() => {});
   }

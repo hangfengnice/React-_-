@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import {Link, withRouter} from 'react-router-dom'
-import './index.less'
 import { Menu, Icon } from "antd";
 import logo from '../../assets/images/logo192.png'
 import menuList from '../../config/menuConfig'
-
+import "./index.less";
 const { SubMenu } = Menu;
 
-class leftNav extends Component {
+class LeftNav extends Component {
 
   // reduce
-
   getMenuNodes2 = (menuList) => {
     const path = this.props.location.pathname
 
@@ -27,7 +25,7 @@ class leftNav extends Component {
       } else {
         const cItem = item.children.find(cItem => path.indexOf(cItem.key) === 0)
           if (cItem) {
-            this.openKey = cItem.key
+            this.openKey = item.key
           }
         pre.push(
           <SubMenu
@@ -47,6 +45,7 @@ class leftNav extends Component {
     }, [])
     return list
   }
+  // map
   // getMenuNodes = (menuList) => {
   //     return menuList.map(item => {
   //       if(!item.children) {
@@ -74,23 +73,21 @@ class leftNav extends Component {
   //       );
   //     })
   // }
-  /**
-   * 
-   */
   UNSAFE_componentWillMount () {
     this.menuNodes = this.getMenuNodes2(menuList);
   }
 
   render() {
     let selectKey = this.props.location.pathname
+    console.log("render()", selectKey);
     if(selectKey.indexOf('/product') === 0) {
       selectKey = '/product'
     }
 
     return (
       <div className="left-nav">
-        <Link className="left-nav-link" to="/admin/home">
-          <img src={logo} alt="" />
+        <Link className="left-nav-link" to="/home">
+          <img src={logo} alt="logo" />
           <h3>React</h3>
         </Link>
 
@@ -108,4 +105,4 @@ class leftNav extends Component {
   }
 }
 
-export default withRouter(leftNav)
+export default withRouter(LeftNav)

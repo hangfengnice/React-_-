@@ -33,7 +33,7 @@ app.get('/test', function (req, res) {
   })
 })
 
-const fs = require('fs')
+// const fs = require('fs')
 
 // 必须在路由器中间之后声明使用
 /*app.use((req, res) => {
