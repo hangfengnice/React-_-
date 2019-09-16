@@ -35,12 +35,14 @@ export const reqWeather = (city) => {
 // export const reqCategorys = () => ajax({
 //   url: "/manage/category/list"
 // })
-export const reqCategorys = () => ajax(Base + "/manage/category/list")
+export const reqCategorys = parentId =>
+         {
+          //  console.log("/src/api/index/parentId", parentId);
+           return ajax(Base + "/manage/category/list", {params:{ parentId }})};
 
 // 添加分类
-export const reqAddCategory = categoryName => ajax.post(Base + "/manage/category/add", {
-           categoryName
-         });
+export const reqAddCategory = (categoryName, parentId) =>
+         ajax.post(Base + "/manage/category/add", { categoryName, parentId });
 
 // 更新分类
 export const reqUpdateCategory = ({categoryId,categoryName}) => {

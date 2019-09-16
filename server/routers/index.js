@@ -146,45 +146,38 @@ router.get('/manage/user/list', (req, res) => {
 
 // 添加分类
 router.post('/manage/category/add', (req, res) => {
-  const {categoryName} = req.body
-  CategoryModel.findOne({name: categoryName})
+  const { categoryName, parentId } = req.body;
+  CategoryModel.create({name: categoryName, parentId: parentId || '0'})
     .then(category => {
-      if (category) {
-        res.send({status: 1, msg: '此分类已存在'})
-      } else {
-        CategoryModel.create({name: categoryName})
-          .then(category => {
-            res.send({status: 0, data: category})
-          })
-          .catch(error => {
-            console.error('添加分类异常', error)
-            res.send({status: 1, msg: '添加分类异常, 请重新尝试'})
-          })
-      }
+      res.send({status: 0, data: category})
     })
-
-  
+    .catch(error => {
+      console.error('添加分类异常', error)
+      res.send({status: 1, msg: '添加分类异常, 请重新尝试'})
+    })
 })
 
 // 获取分类列表
 router.get('/manage/category/list', (req, res) => {
-  CategoryModel.find({})
+  // console.log(req.body.parentId, req.query.parentId);
+  const parentId = req.query.parentId || "0";
+  CategoryModel.find({ parentId })
     .then(categorys => {
-      res.send({status: 0, data: categorys})
+      res.send({ status: 0, data: categorys });
     })
     .catch(error => {
-      console.error('获取分类列表异常', error)
-      res.send({status: 1, msg: '获取分类列表异常, 请重新尝试'})
-    })
+      console.error("获取分类列表异常", error);
+      res.send({ status: 1, msg: "获取分类列表异常, 请重新尝试" });
+    });
 })
 
 // 更新分类名称
 router.post('/manage/category/update', (req, res) => {
   const {categoryId, categoryName} = req.body
-  console.log(categoryId, categoryName);
+  // console.log(categoryId, categoryName);
   CategoryModel.findOneAndUpdate(
     { _id: categoryId },
-    { _id: categoryId, name: categoryName }
+    { name: categoryName }
   )
     .then(oldCategory => {
       res.send({ status: 0 });

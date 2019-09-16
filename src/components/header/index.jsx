@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom'
 import {Modal} from 'antd'
 import {formateDate} from '../../utils/dateUtils'
 import memoryUtils from '../../utils/memoryUtils'
+import storageUtils from "../../utils/storageUtils";
 import LinkButton from '../link-button'
 import {reqWeather} from '../../api'
 import menuList from '../../config/menuConfig'
@@ -15,11 +16,14 @@ class Header extends Component {
     dayPictureUrl: "",
     weather: ""
   };
+  // 退出登录
   logout = () => {
     Modal.confirm({
       title: "确认退出吗",
       onOk: () => {
-        this.props.history.repalce("/login");
+        storageUtils.removeUser()
+        memoryUtils.user = {}
+        this.props.history.replace("/login");
       },
       onCancel: () => {}
     });
