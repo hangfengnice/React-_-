@@ -6,7 +6,7 @@ import { PAGE_SIZE } from "../../utils/constant";
 import memoryUtils from "../../utils/memoryUtils";
 const Option = Select.Option;
 
-export default class product extends Component {
+export default class ProductHome extends Component {
   state = {
     loading: false,
     products: [],
@@ -15,7 +15,6 @@ export default class product extends Component {
     searchName: ""
   };
   updateStatus = async (productId, status) => {
-    status = status === 1 ? 2 : 1;
     const result = await reqUpdateStatus(productId, status);
     if (result.status === 0) {
       message.success("更新商品成功");
@@ -41,31 +40,30 @@ export default class product extends Component {
       {
         title: "状态",
         // dataIndex: "status",
+        width: 100,
         render: ({ status, _id }) => {
-          let btnText = "下架";
-          let text = "在售";
-          if (status === 2) {
-            btnText = "上架";
-            text = "已下架";
-          }
+          const newStatus = status === 1 ? 2 : 1;
           return (
             <span>
-              <button onClick={() => this.updateStatus(_id, status)}>
-                {btnText}
-              </button>
-              <span>{text}</span>
+              <Button
+                type="primary"
+                onClick={() => this.updateStatus(_id, newStatus)}
+              >
+                {status === 1 ? "下架" : "上架"}
+              </Button>
+              <span>{status === 1 ? "在售" : "已下架"}</span>
             </span>
           );
         }
       },
       {
         title: "操作",
+        width: 100,
         render: product => (
           <span>
             <LinkButton
-              onClick={product => {
-                memoryUtils.product = product;
-                this.props.history.push("/product/detail");
+              onClick={() => {
+                this.props.history.push("/product/detail", product);
               }}
             >
               详情
@@ -73,7 +71,7 @@ export default class product extends Component {
             <LinkButton
               onClick={product => {
                 memoryUtils.product = product;
-                this.props.history.push("/product/addupdate");
+                this.props.history.push("/product/addupdate" );
               }}
             >
               修改
@@ -84,25 +82,23 @@ export default class product extends Component {
     ];
   };
   getProducts = async pageNum => {
-    this.pageNum = pageNum;
-    const { searchType, searchName } = this.state;
+    this.pageNum = pageNum
+    this.setState({loading: true})
+    const {searchName, searchType} = this.state
     let result;
-    if (!searchName) {
-      result = await reqProducts(pageNum, PAGE_SIZE);
+    if (searchName) {
+      result = await reqSearchProducts({ pageNum, pageSize: PAGE_SIZE, searchName, searchType});
+
     } else {
-      result = await reqSearchProducts({
-        pageNum,
-        pageSize: PAGE_SIZE,
-        searchName,
-        searchType
-      });
+      result = await reqProducts(pageNum, PAGE_SIZE);
     }
+    this.setState({ loading: false });
     if (result.status === 0) {
-      const { total, list } = result.data;
+      const {total, list} = result.data
       this.setState({
-        products: list,
-        total
-      });
+        total,
+        products: list
+      })
     }
   };
   UNSAFE_componentWillMount() {
@@ -143,10 +139,11 @@ export default class product extends Component {
         添加商品
       </Button>
     );
+    
     return (
       <Card title={title} extra={extra}>
         <Table
-          columns={this.columns}
+          columns={this.column}
           dataSource={products}
           rowKey="_id"
           bordered
@@ -159,6 +156,7 @@ export default class product extends Component {
             current: this.pageNum
           }}
         />
+        good
       </Card>
     );
   }

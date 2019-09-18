@@ -65,7 +65,7 @@
     2). 组件: 实现局部功能界面的所有代码的集合
     3). 组件化: 如果项目的功能界面是由多个组件组合编写实现的, 那这个项目就是一个组件化的项目, 也就是组件的编码方式
 
-## 7. 调用 setState 之后发生了什么？
+## 7. 调用 setState 之后发生了什么
 
     1). React 会将传入的参数对象与组件当前的状态合并产生了新的state
     2). 生成新的虚拟DOM树  ==> render()
@@ -134,7 +134,7 @@
           生成本地打包文件
           启动服务器加载运行本地打包文件
 
-## 13. 为什么虚拟dom和dom diff算法能提高性能?
+## 13. 为什么虚拟dom和dom diff算法能提高性能
 
     虚拟dom相当于在js和真实dom中间加了一个缓存，利用dom diff算法避免了没有必要的dom操作，从而提高性能。
     具体实现步骤如下：
@@ -184,7 +184,7 @@
       map() / forEach() / find() / findIndex() / reduce()
       arr.find(item => item>3)
 
-## 17. 说说react应用中如何与后台通信?
+## 17. 说说react应用中如何与后台通信
 
     1). 通过ajax请求与后台交互, 但react本身并不包含ajax语法封装
     2). 可以使用axios/fetch来发送ajax请求
@@ -192,7 +192,7 @@
        a. 初始化请求: componentDidMount()
        b. 用户操作后请求: 事件回调函数或相关位置 
 
-## 18. 项目开发中常用的ES6语法有哪些？
+## 18. 项目开发中常用的ES6语法有哪些
 
     定义变量/常量: const/let
         解构赋值: let {a, b} = this.props / import {aa} from 'xxx' / function f ({name}) {}
@@ -217,3 +217,5 @@
         在返回promise对象的表达式左侧, 为了直接得到异步返回的结果, 而不是promsie对象
     3). 哪里使用async?
         使用了await的函数定义左侧
+
+combineReducers {redux}

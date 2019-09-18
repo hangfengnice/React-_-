@@ -51,7 +51,7 @@ export const reqUpdateCategory = ({categoryId,categoryName}) => {
     categoryName
   });}
 
-// 获取商品分页列表
+// 获取商品分页列表 productName/productDesc
 export const reqProducts = (pageNum, pageSize) => ajax(Base + "/manage/product/list", {params: {
   pageNum,
   pageSize
@@ -67,13 +67,17 @@ export const reqSearchProducts = ({pageNum, pageSize, searchName, searchType}) =
 })
 
 // 对商品进行上下架操作
-export const reqUpdateStatus = (productId, status) => ajax(Base + '/manage/product/updateStatus', {
-  method: "POST",
-  date: {
+export const reqUpdateStatus = (productId, status) => {
+  return ajax.post(Base + '/manage/product/updateStatus', 
+{
     productId,
     status
   }
-})
+)}
+
+// 获取一个分类
+export const reqCategory = categoryId =>
+         ajax(Base + "/manage/category/info", { params: { categoryId } });
 
 // 删除图片
 export const reqDeleteImg = (name) => ajax.post(Base + '/manage/img/delete', {name})
