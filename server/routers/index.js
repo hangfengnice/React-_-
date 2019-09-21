@@ -313,15 +313,15 @@ router.post('/manage/product/updateStatus', (req, res) => {
 
 // 添加角色
 router.post('/manage/role/add', (req, res) => {
-  const {roleName} = req.body
-  RoleModel.create({name: roleName})
+  const { name } = req.body;
+  RoleModel.create({ name})
     .then(role => {
-      res.send({status: 0, data: role})
+      res.send({ status: 0, data: role });
     })
     .catch(error => {
-      console.error('添加角色异常', error)
-      res.send({status: 1, msg: '添加角色异常, 请重新尝试'})
-    })
+      console.error("添加角色异常", error);
+      res.send({ status: 1, msg: "添加角色异常, 请重新尝试" });
+    });
 })
 
 // 获取角色列表
@@ -340,10 +340,11 @@ router.get('/manage/role/list', (req, res) => {
 router.post('/manage/role/update', (req, res) => {
   const role = req.body
   role.auth_time = Date.now()
-  RoleModel.findOneAndUpdate({_id: role._id}, role)
+  RoleModel.findOneAndUpdate({_id: role._id}, role, {new: true})
     .then(oldRole => {
       // console.log('---', oldRole._doc)
-      res.send({status: 0, data: {...oldRole._doc, ...role}})
+      // console.log(oldRole)
+      res.send({status: 0, data: {...oldRole, ...role}})
     })
     .catch(error => {
       console.error('更新角色异常', error)

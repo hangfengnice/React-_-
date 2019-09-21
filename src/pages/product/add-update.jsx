@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 // import { Redirect } from "react-router-dom";
-import { 
-  Card, Icon, Form, Input, Select, Button , message} from "antd";
+import {
+  Card,
+  Icon,
+  Form,
+  Input,
+  Select,
+  Button,
+  message
+  // Cascader
+} from "antd";
 import LinkButton from "../../components/link-button";
 import { reqCategorys, reqAddUpdateProduct } from "../../api";
 import memoryUtils from '../../utils/memoryUtils'
@@ -9,6 +17,7 @@ import PicturesWall from './picture-wall'
 import RichTextEditor from './rich-text-editor'
 const Item = Form.Item;
 const Option = Select.Option
+const { TextArea } = Input;
 class ProductAddUpdate extends Component {
   constructor(props) {
     super(props);
@@ -104,7 +113,7 @@ class ProductAddUpdate extends Component {
             {getFieldDecorator("desc", {
               initialValue: product.desc,
               rules: [{ required: true, message: "必须输入商品描述!" }]
-            })(<Input placeholder="商品描述" />)}
+            })(<TextArea placeholder="商品描述" autosize={{ minRows: 2, maxRows: 6 }} />)}
           </Item>
           <Item label="商品价格">
             {getFieldDecorator("price", {

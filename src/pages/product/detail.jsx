@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
 import {
   Card,
   Icon,
   List
 } from 'antd'
 import LinkButton from '../../components/link-button'
-import memoryUtils from "../../utils/memoryUtils";
+// import memoryUtils from "../../utils/memoryUtils";
 import { reqCategory } from "../../api";
 import { BASE_IMG } from "../../utils/constant";
 const Item = List.Item
