@@ -93,3 +93,10 @@ export const reqAddRole = (name) => ajax.post(Base + '/manage/role/add', {name})
 // 更新role
 export const reqUpdateRole = (role) => ajax.post(Base + '/manage/role/update', role)
 
+// 获取用户列表
+export const reqUsers = () => ajax(Base + '/manage/user/list')
+// 删除
+export const reqDeleteUsers = (userId) => ajax.post(Base + '/manage/user/delete', {userId})
+// 添加
+export const reqAddOrUpdateUsers = (user) => ajax.post(Base + '/manage/user/' + (user._id ? "update" : "add"), user)
+

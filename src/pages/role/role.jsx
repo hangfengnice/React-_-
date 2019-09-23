@@ -8,6 +8,7 @@ import {
 } from 'antd'
 import { PAGE_SIZE } from "../../utils/constant";
 import {formateDate} from '../../utils/dateUtils'
+import memoryUtils from '../../utils/memoryUtils.js'
 import {reqRoles, reqAddRole, reqUpdateRole} from '../../api/index'
 import AddForm from './add-form'
 import AuthForm from "./auth-form";
@@ -89,6 +90,7 @@ export default class Role extends Component {
     const role = this.state.role
     const menus = this.auth.current.getMenus()
     role.menus = menus
+    role.auth_name = memoryUtils.user.username
     const result = await reqUpdateRole(role)
     if (result.status === 0) {
       message.success('success')
@@ -129,7 +131,10 @@ export default class Role extends Component {
           dataSource={roles}
           columns={this.columns}
           pagination={{ defaultPageSize: PAGE_SIZE }}
-          rowSelection={{ type: "radio", selectedRowKeys: [role._id] }}
+          rowSelection={{ 
+            type: "radio", selectedRowKeys: [role._id],
+            onSelect: (role) =>this.setState({role}) 
+           }}
           onRow={this.onRow}
         />
         <Modal

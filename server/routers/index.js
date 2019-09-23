@@ -131,11 +131,11 @@ router.post('/manage/user/delete', (req, res) => {
 
 // 获取所有用户列表
 router.get('/manage/user/list', (req, res) => {
-  UserModel.find({username: {'$ne': 'admin'}})
+  UserModel.find()
     .then(users => {
       RoleModel.find().then(roles => {
-        res.send({status: 0, data: {users, roles}})
-      })
+        res.send({ status: 0, data: { users, roles } });
+      });
     })
     .catch(error => {
       console.error('获取用户列表异常', error)

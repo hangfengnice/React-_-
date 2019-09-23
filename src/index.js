@@ -9,14 +9,15 @@ import App from './App';
 // import store from "./basic/redux-learn/redux/store";
 // import App from './basic/react-redux-learn/containers/App'
 // import store from "./basic/react-redux-learn/redux/store";
-// import {Provider} from 'react-redux'
+import {Provider} from 'react-redux'
+import store from './redux/store'
 // import store from './basic/github/store'
 // import store from './basic/comment/redux/store'
 
 ReactDOM.render(
-  // <Provider store={store}>
+  <Provider store={store}>
     <App />
-  // </Provider>
+  </Provider>
   ,
   document.getElementById("root")
 );

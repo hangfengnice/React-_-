@@ -33,6 +33,11 @@ export default class AuthForm extends Component {
   UNSAFE_componentWillMount() {
     this.treeNode = this.getTreeNodes(menuList)
   }
+  UNSAFE_componentWillReceiveProps(props) {
+    console.log("nextProps", props)
+   const menus = props.role
+   this.setState({checkedKeys: menus})
+  }
   render() {
     const { role } = this.props
     const {checkedKeys} = this.state
