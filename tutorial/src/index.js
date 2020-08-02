@@ -1,64 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+let arrdata = [
+  {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
+  {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
+  {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
+  {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
+  {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
+  {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
+];
 
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: new Date(),
-      name: "helo",
-    };
-  }
-  componentDidMount() {
-    this.timerId = setInterval(() => this.tick(), 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerId);
-  }
-  tick() {
-    this.setState({
-      date: new Date(),
-    });
-  }
-
-  render() {
-    console.log("helo");
-    return (
-      <div>
-        <h1>Hello, world! {this.state.name}</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
-}
-const numbers = [1, 2, 3]
-const listItems = numbers.map(item => <li key={item}>{item}</li>)
-
-class NameForm extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {value: ''}
-
-  }
-  handleChange(e) {
-    this.setState({
-      value: e.target.value
-    })
-  }
-  handleSubmit(e) {
-    console.log(this.state.value);
-    e.preventDefault()
-  }
-  render() {
-    return <form onSubmit={(e) => this.handleSubmit(e)}>
-    <label>
-      Name:
-      <input type="text" value={this.state.value} onChange={(e) => this.handleChange(e)} />
-    </label>
-    <input type="submit" value="Submit" />
-  </form>
-  }
-}
-
-
-ReactDOM.render(<NameForm />, document.getElementById("root"))
+ReactDOM.render(<WelcomeDialog />, document.getElementById("root"));

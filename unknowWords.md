@@ -40,4 +40,18 @@
 * synthetic 人工合成
 * annoy 恼火
 * equivalent 相等的
+* convenient 方便的
+* subsequent 随后的
+* demonstrate 证明
+* fledged 羽翼长满了
+* submission 屈服
+* neglect 忽略
+* celsius 摄氏度
+* contradict 矛盾
+* premier 首要的
+* instagram 社交
+* hierarchy 阶层
+* italicized 斜体书写
+
+
 * 
