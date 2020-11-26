@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/expect/1.20.2/expect.min.js"></script>
+</head>
+<body>
+  <div class='wrapper'>
+    <button class='like-btn'>
+      <span class='like-text'>点赞</span>
+      <span>👍</span>
+    </button>
+  </div>
+  <script>
+    const button = document.querySelector('.like-btn')
+    const buttonText = document.querySelector('.like-text')
+
+    let isLiked = false
+    button.addEventListener('click', function () {
+      isLiked = !isLiked
+      if (isLiked) {
+        buttonText.innerHTML = '取消'
+      } else {
+        buttonText.innerHTML = '点赞'
+      }
+    })
+  </script>
+</body>
+</html>
