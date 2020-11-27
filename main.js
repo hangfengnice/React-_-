@@ -1,17 +1,57 @@
-var maximumGap = function(nums) {
-  let len = nums.length
-  if (len < 2) return 0
-  nums = [...nums].sort((a, b) => a - b)
-  console.log(nums);
-  let result = 0
-  for(let i = 1; i < len; i ++) {
-    let temp = nums[i] - nums[i - 1]
-    result = temp > result ? temp : result
+let state = [];
+let setters = [];
+let firstRun = true;
+let cursor = 0;
+
+function createSetter(cursor) {
+  return function setterWithCursor(newVal) {
+    state[cursor] = newVal;
+  };
+}
+
+/* 译:https://github.com/answershuto */
+// This is the pseudocode for the useState helper
+export function useState(initVal) {
+  if (firstRun) {
+    state.push(initVal);
+    setters.push(createSetter(cursor));
+    firstRun = false;
   }
 
-  return result
-};
+  const setter = setters[cursor];
+  const value = state[cursor];
 
-let res = maximumGap([3, 6, 9, 1])
+  cursor++;
+  return [value, setter];
+}
 
-console.log(res);
+/* 译:https://github.com/answershuto */
+// Our component code that uses hooks
+function RenderFunctionComponent() {
+  const [firstName, setFirstName] = useState("Rudi"); // cursor: 0
+  const [lastName, setLastName] = useState("Yardley"); // cursor: 1
+
+  return (
+    <div>
+      <Button onClick={() => setFirstName("Richard")}>Richard</Button>
+      <Button onClick={() => setFirstName("Fred")}>Fred</Button>
+    </div>
+  );
+}
+
+// This is sort of simulating Reacts rendering cycle
+function MyComponent() {
+  cursor = 0; // resetting the cursor
+  return <RenderFunctionComponent />; // render
+}
+
+console.log(state); // Pre-render: []
+MyComponent();
+console.log(state); // First-render: ['Rudi', 'Yardley']
+MyComponent();
+console.log(state); // Subsequent-render: ['Rudi', 'Yardley']
+
+// click the 'Fred' button
+
+console.log(state); // After-click: ['Fred', 'Yardley']
+

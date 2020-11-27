@@ -1,11 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Example 01';
+import React, {useState} from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+
+function App() {
+  const [name, setName] = useState('hangfeng')
+  const [yy, setYy] = useState('hangfeng')
+
+  return <div>
+    <p>name: {name}</p>
+    <p>yy: {yy}</p>
+    <button onClick={() => setName(name + '1')}>click</button>
+    <button onClick={() => setYy(yy + '1')}>click</button>
+    butt
+  </div>;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
