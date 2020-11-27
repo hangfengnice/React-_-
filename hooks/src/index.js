@@ -25,6 +25,7 @@ function useFormInput() {
     value,
     onChange(e) {
       setValue(e.target.value)
+      alert('hello')
     }
   }
 }
