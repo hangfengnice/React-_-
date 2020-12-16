@@ -1,61 +1,36 @@
-import React from "react";
+import React, {useState, useRef, useEffect} from "react";
 import ReactDOM from "react-dom";
-// import App from "./App";
 
-function Child() {
-  console.log("child");
-  return <header>head child</header>;
-}
 
-// function Son() {
-//   console.log("son");
-//   return <div>son</div>;
-// }
-
-class Son extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: "name",
-    };
-  }
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        name: "yy",
-      });
-    }, 500);
-  }
-  render() {
-    // console.log("son");
-    return <header>head son</header>;
-  }
-}
-
-class Parent extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: "ha",
-    };
-  }
-  // componentDidMount() {
-  //   setInterval(() => {
-  //     this.setState({
-  //       name: 'yy'
-  //     })
-  //   }, 500)
-  // }
-  render() {
+function usePrevious(value) {
+  const ref = useRef()
+  console.log('outer here');
+  useEffect(() => {
     console.log('here');
-    const { name } = this.state;
-    return (
-      <div>
-        <Child name={name} />
-        <Son />
-      </div>
-    );
-  }
+    ref.current = value
+  })
+  return ref.current
 }
 
-ReactDOM.render(<Parent />, document.getElementById("root"));
+function Example(props) {
+  // 把最新的 props 保存在一个 ref 中
+  const latestProps = useRef(props);
+  useEffect(() => {
+    latestProps.current = props;
+    console.log(latestProps);
+  });
+
+  useEffect(() => {
+    function tick() {
+      // 在任何时候读取最新的 props
+      console.log(latestProps.current);
+    }
+
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []); // 这个 effect 从不会重新执行
+  return 'hello world'
+}
+ReactDOM.render(
+  <Example />
+  , document.getElementById("root"));
